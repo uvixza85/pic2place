@@ -29,7 +29,7 @@ function ImageCarousel({imageurl}){
       {imageurl.map((item) => (
           <div key={item.id} className="card">
            
-            <ImageCard imgurl={item.imageurl} />
+            <ImageCard imgurl={item.imageurl} Latitude = {item.location}   className="carousel-card"/>
           </div>
         ))}
         </Slider>

@@ -1,11 +1,15 @@
-import React from "react";
 import "./HighlightedCard.css"
+import React from "react";
+
 
 function ImageCard(props){
+    
     return(
         <div>
-            <img src={props.imgurl } className="img-card"/>
-            <h2>location</h2>
+            <img src={props.imgurl } className="highlight-card"    />
+        
+            
+            <h2>📍Location: {props.Latitude}</h2>
         </div>
     );
 }

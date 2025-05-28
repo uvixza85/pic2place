@@ -10,13 +10,22 @@ function App() {
   
   const [selectedFile, setSelectedFile] = useState(null);
   const [images, setImages] = useState([]);
+  const [Location , setLocation ] = useState(null);
 
-      const handleFileChange = (file) => {
-        setSelectedFile(file);
-        console.log('File received in App.jsx:', file);
-        setImages((prev) => [...prev, { id: Date.now(), 
-          imageurl: file,
-          blob: file }]);
+      const handleFileChange = (fileObj) => {
+        const {  url, Latitude, Longitude } = fileObj;
+
+        setSelectedFile(url);
+        setLocation(Latitude);
+        console.log("File received:", url);
+        console.log("Latitude received:", Latitude);
+        console.log("Longitude received:", Longitude);
+
+        setImages((prev) => [...prev, { 
+          id: Date.now(), 
+          imageurl: url,
+          blob: url,
+        location: Latitude }]);
         
         
         //console.log(images);
@@ -38,9 +47,9 @@ function App() {
       
       {selectedFile && (
       <>
-        <ImageCard imgurl={selectedFile} className="dispimg" />
+        <ImageCard imgurl={selectedFile}  Latitude = {Location} className="dispimg" />
         
-        <ImageCarousel imageurl={images} />
+        <ImageCarousel imageurl={images}  />
       </>
       )
     }

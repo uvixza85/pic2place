@@ -13,19 +13,18 @@ function App() {
   const [Location , setLocation ] = useState(null);
 
       const handleFileChange = (fileObj) => {
-        const {  url, Latitude, Longitude } = fileObj;
+        const {  url, Location} = fileObj;
 
         setSelectedFile(url);
-        setLocation(Latitude);
+        setLocation(Location);
         console.log("File received:", url);
-        console.log("Latitude received:", Latitude);
-        console.log("Longitude received:", Longitude);
+        console.log("Location received:", Location);
 
         setImages((prev) => [...prev, { 
           id: Date.now(), 
           imageurl: url,
           blob: url,
-        location: Latitude }]);
+          location: Location }]);
         
         
         //console.log(images);

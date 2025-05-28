@@ -3,6 +3,55 @@ import "./ImageUpload.css"
 import ExifReader from "exifreader";
 import heic2any from "heic2any";
 
+async function nearbySearch(latitude,longitude) {
+  
+    //@ts-ignore
+    const { Place, SearchNearbyRankPreference } = await google.maps.importLibrary(
+      "places",
+    );
+    
+    // Restrict within the map viewport.
+    let center = new google.maps.LatLng(latitude,longitude );
+    const request = {
+      // required parameters
+      fields: ["displayName", "location", "businessStatus","types"],
+      locationRestriction: {
+        center: center,
+        radius: 500,
+      },
+      // optional parameters
+      excludedPrimaryTypes:["car_rental",
+        "gas_station",
+        "parking",
+        "atm",
+        "bank",
+        "bus_station",
+        "train_station",
+        "hospital",
+        "hotel",
+        "shopping_mall",
+        "supermarket",
+        "gym",
+        "airport",
+    ],
+      maxResultCount: 2,
+      rankPreference: SearchNearbyRankPreference.DISTANCE,
+      language: "en-US",
+      region: "us",
+    };
+    //@ts-ignore
+    const { places } = await Place.searchNearby(request);
+  
+    if (places.length) {
+      console.log(places[0].displayName);
+      console.log(places[0].types);
+      return places[0].displayName
+      // Loop through and get all the results.
+    } else {
+      console.log("No results");
+    }
+  }
+
 
 function ImageUpload({ onFileSelect }){
 
@@ -26,28 +75,23 @@ function ImageUpload({ onFileSelect }){
             const tags =  ExifReader.load(arrayBuffer, { expanded: true });
             const latitude = tags.gps.Latitude
             const longitude = tags.gps.Longitude
-            console.log(latitude );
-            console.log(longitude);
+            const location = nearbySearch(latitude, longitude);
+            console.log(location);
             onFileSelect({
                 url: newurl,
-                Latitude: latitude,
-                Longitude: longitude
+                Location :location
               });
     
-          } catch (err) {
+        } 
+        catch (err) {
             
             console.error("Error reading EXIF:", err);
             onFileSelect({
                 url: newurl,
-                Latitude: null,
-                Longitude: null,
+                Location:null,
             });
         
-          }
-
-
-        
-        
+        } 
     }
     return ( 
     

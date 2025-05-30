@@ -4,32 +4,32 @@ import './App.css'
 import ImageUpload from './components/ImageUpload';
 import ImageCarousel from './components/ImageCarousel';
 import ImageCard from './components/ImageCard';
+import MainCard from './components/MainCard';
 import  { useEffect } from 'react';
 
 function App() {
   
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [SelectedImage, setSelectedImage] = useState(null);
   const [images, setImages] = useState([]);
-  const [Location , setLocation ] = useState(null);
 
       const handleFileChange = (fileObj) => {
-        const {  url, Location} = fileObj;
-
-        setSelectedFile(url);
-        setLocation(Location);
-        console.log("File received:", url);
-        console.log("Location received:", Location);
-
-        setImages((prev) => [...prev, { 
-          id: Date.now(), 
+        const { name, url, Location ,date ,time} = fileObj
+        
+        const newImage = {
+          id: Date.now(),
+          name,
           imageurl: url,
           blob: url,
-          location: Location }]);
-        
-        
-        //console.log(images);
+          location: Location,
+          date,
+          time,
+        };
+    
+        setImages((prev) => [...prev, newImage]);
+        setSelectedImage(newImage);
 
       };
+
       useEffect(() => {
         return () => {
           images.forEach(image => {
@@ -44,11 +44,15 @@ function App() {
     <div className='mainpage'>
       <ImageUpload onFileSelect={handleFileChange}/>
       
-      {selectedFile && (
+      {SelectedImage && (
       <>
-        <ImageCard imgurl={selectedFile}  Latitude = {Location} className="dispimg" />
+        <MainCard 
+        imgurl={SelectedImage.imageurl}
+        location={SelectedImage.location}
+        date={SelectedImage.date}
+        time={SelectedImage.time}
+        name={SelectedImage.name}    className="dispimg" />
         
-        <ImageCarousel imageurl={images}  />
       </>
       )
     }

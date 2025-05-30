@@ -14,7 +14,7 @@ async function nearbySearch(latitude,longitude) {
     let center = new google.maps.LatLng(latitude,longitude );
     const request = {
       // required parameters
-      fields: ["displayName", "location", "businessStatus","types"],
+      fields: ["displayName", "location"],
       locationRestriction: {
         center: center,
         radius: 500,
@@ -43,10 +43,7 @@ async function nearbySearch(latitude,longitude) {
     const { places } = await Place.searchNearby(request);
   
     if (places.length) {
-      console.log(places[0].displayName);
-      console.log(places[0].types);
       return places[0].displayName
-      // Loop through and get all the results.
     } else {
       console.log("No results");
     }
@@ -70,16 +67,21 @@ function ImageUpload({ onFileSelect }){
               } else {
                 newurl = URL.createObjectURL(selectedFile);
               }
-
+            const name = selectedFile.name;
             const arrayBuffer = await selectedFile.arrayBuffer();
             const tags =  ExifReader.load(arrayBuffer, { expanded: true });
+            const datetimeStr = tags.exif.DateTime.value;
+            const [date, time] = datetimeStr[0].split(" ");
             const latitude = tags.gps.Latitude
             const longitude = tags.gps.Longitude
+
             const location = nearbySearch(latitude, longitude);
-            console.log(location);
             onFileSelect({
+              name : name,
                 url: newurl,
-                Location :location
+                Location :location,
+                date: date,
+                time: time
               });
     
         } 

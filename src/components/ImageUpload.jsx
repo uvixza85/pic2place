@@ -2,6 +2,7 @@ import React from "react";
 import "./ImageUpload.css"
 import ExifReader from "exifreader";
 import heic2any from "heic2any";
+import { useState } from "react";
 
 async function nearbySearch(latitude,longitude) {
   
@@ -51,7 +52,7 @@ async function nearbySearch(latitude,longitude) {
 
 
 function ImageUpload({ onFileSelect }){
-
+ const [uploaded , setUploaded] = useState(false);
 
     async function fileview(event){
         const selectedFile = event.target.files[0];
@@ -67,6 +68,7 @@ function ImageUpload({ onFileSelect }){
               } else {
                 newurl = URL.createObjectURL(selectedFile);
               }
+              setUploaded(true)
             const name = selectedFile.name;
             const arrayBuffer = await selectedFile.arrayBuffer();
             const tags =  ExifReader.load(arrayBuffer, { expanded: true });
@@ -83,6 +85,7 @@ function ImageUpload({ onFileSelect }){
                 date: date,
                 time: time
               });
+              
     
         } 
         catch (err) {
@@ -96,14 +99,24 @@ function ImageUpload({ onFileSelect }){
         } 
     }
     return ( 
-    
+
     <div>
-        
-    <div className = "uploadimg">
-    <h1>upload image</h1>
+       <input
+        type="file"
+        id="fileInput"
+        onChange={fileview}
+        style={{ display: 'none' }}
+      />
+     { (uploaded == true) ? <div className = "uploadedimg">
+      <button className="upload-btn" onChange= {fileview}  onClick={() => document.getElementById('fileInput').click()}>
+    <span className="plus-icon">➕</span>
+     </button></div> :<div className = "uploadimg">
+    <h1>upload Image </h1>
     <input type='file' onChange= {fileview} />
-    </div>
-    </div>)
+    </div>}
+
+    
+    </div>);
           
     
 }

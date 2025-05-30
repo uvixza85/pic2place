@@ -2,10 +2,9 @@ import React from 'react'
 import { useState } from 'react';
 import './App.css'
 import ImageUpload from './components/ImageUpload';
-import ImageCarousel from './components/ImageCarousel';
-import ImageCard from './components/ImageCard';
 import MainCard from './components/MainCard';
 import  { useEffect } from 'react';
+import Thumbnail from './components/Thumbnail';
 
 function App() {
   
@@ -42,7 +41,7 @@ function App() {
 
   return (
     <div className='mainpage'>
-      <ImageUpload onFileSelect={handleFileChange}/>
+      <ImageUpload onFileSelect={handleFileChange} className = "upload"/>
       
       {SelectedImage && (
       <>
@@ -52,6 +51,13 @@ function App() {
         date={SelectedImage.date}
         time={SelectedImage.time}
         name={SelectedImage.name}    className="dispimg" />
+
+       <Thumbnail
+        images={images}
+        onSelect={(item) => {
+          setSelectedImage(item);}}
+      selectedImage ={SelectedImage }
+/>
         
       </>
       )

@@ -5,7 +5,7 @@ function ImageCard(props){
     return(
         <div>
             <img src={props.imgurl }  className={props.className}  />
-        </div>
+         </div>
     );
 }
 export default ImageCard;

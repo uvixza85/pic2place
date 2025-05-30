@@ -6,9 +6,12 @@
 
     margin: 50px auto;
     padding: 24px;
-    width: 650px;
+    width: 800px;
     border:10px solid #f8e1b4;
-    
+       gap: 20px;
+
+
+
     /* Accent border */
     border-radius: 12px;
     background: linear-gradient(135deg, #ffffff, #f9f9f9);
@@ -23,9 +26,12 @@
 }
 
 .image {
-    height: 150px;
-    width: 200px;
-    object-fit: cover;
+    max-height: 400px;
+        max-width: 400px;
+        width: auto;
+        height: auto;
+        border-radius: 12px;
+        object-fit: contain;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border: 2px solid #ddd;
@@ -34,7 +40,7 @@
 }
 
 .image:hover {
-    transform: scale(2.5);
+    transform: scale(1.25);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     z-index: 20;
 }

@@ -1,23 +1,21 @@
 .maincard {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: flex-start;
 
-    margin: 50px auto;
-    padding: 24px;
-    width: 800px;
+    margin: 20px auto;
+    padding: 15px;
+    width: 900px;
     border:10px solid #f8e1b4;
-       gap: 20px;
-
-
+    gap: 5px;
 
     /* Accent border */
     border-radius: 12px;
     background: linear-gradient(135deg, #ffffff, #f9f9f9);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    gap: 24px;
+    gap: 2px;
 }
 
 .maincard:hover {
@@ -26,37 +24,31 @@
 }
 
 .image {
-    max-height: 400px;
-        max-width: 400px;
-        width: auto;
-        height: auto;
-        border-radius: 12px;
-        object-fit: contain;
-    border-radius: 10px;
+    height: 450px;
+    width: 650px;
+    border-radius: 12px;
+    object-fit: cover;
+    border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border: 2px solid #ddd;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     /* Add transition */
 }
 
-.image:hover {
-    transform: scale(1.25);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-    z-index: 20;
-}
+
 
 .maincard-content {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 12px;
+    gap: 5px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .maincard-content h2 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1 rem;
     color: #333;
 }
 
@@ -65,4 +57,31 @@
     font-size: 1rem;
     color: #555;
     line-height: 1.4;
+}
+
+
+
+
+@media only screen and (max-width: 992px) {
+    .maincard {
+            width: 90%;
+            padding: 10px;
+            border-width: 6px;
+            height: 70%;
+        }
+    
+        .image {
+            width: 100%;
+            max-width: 100%;
+            aspect-ratio: 4 / 3;
+        }
+    
+        .maincard-content h2 {
+            font-size: 1.25rem;
+        }
+    
+        .maincard-content p {
+            font-size: 0.95rem;
+        }
+
 }

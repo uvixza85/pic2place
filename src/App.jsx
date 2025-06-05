@@ -41,7 +41,7 @@ function App() {
 
   return (
     <div className='mainpage'>
-      <ImageUpload onFileSelect={handleFileChange} className = "upload"/>
+      <ImageUpload onFileSelect={handleFileChange} />
       
       {SelectedImage && (
       <>

@@ -1,5 +1,5 @@
 import React from "react";
-import "./ImageUpload.css"
+import "./imageUpload.css"
 import ExifReader from "exifreader";
 import heic2any from "heic2any";
 import { useState } from "react";

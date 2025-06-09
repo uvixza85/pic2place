@@ -101,18 +101,20 @@ function ImageUpload({ onFileSelect }){
     return ( 
 
     <div>
-       <input
-        type="file"
-        id="fileInput"
-        onChange={fileview}
-        style={{ display: 'none' }}
-      />
-     { (uploaded == true) ? <div className = "uploadedimg">
-      <button className="upload-btn" onChange= {fileview}  onClick={() => document.getElementById('fileInput').click()}>
-    <span className="plus-icon">➕</span>
-     </button></div> :<div className = "uploadimg">
+      <h1 className="mainheading">🧭SnappyMap</h1> 
+     { (uploaded == true) ? <div className = "uploadedimg"> <label>
+      <input type='file' onChange= {fileview} accept="video/*,image/*"
+        hidden/>
+        <img src="/images/uploaderm.png"  className="imagelogo1"/>
+        </label>
+       </div>
+       :<div className = "uploadimg">
     <h1>upload Image </h1>
-    <input type='file' onChange= {fileview} />
+    <label className="impir">
+    <input type='file' onChange= {fileview} accept="video/*,image/*"
+        hidden/>
+        <img src="/images/uploaderm.png"  className="imagelogo"/>
+        </label>
     </div>}
 
     

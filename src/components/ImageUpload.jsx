@@ -73,16 +73,25 @@ function ImageUpload({ onFileSelect }){
             const arrayBuffer = await selectedFile.arrayBuffer();
             const tags =  ExifReader.load(arrayBuffer, { expanded: true });
             const datetimeStr = tags.exif.DateTime.value;
-            const [date, time] = datetimeStr[0].split(" ");
             const latitude = tags.gps.Latitude
             const longitude = tags.gps.Longitude
+
+            const [rawDate, time] = datetimeStr[0].split(" ");
+            const [year, month, day] = rawDate.split(":").map(Number);
+            
+            const dateObj = new Date(year, month - 1, day);
+            const formattedDate = dateObj.toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            });
 
             const location = nearbySearch(latitude, longitude);
             onFileSelect({
               name : name,
                 url: newurl,
                 Location :location,
-                date: date,
+                date:formattedDate ,
                 time: time
               });
               

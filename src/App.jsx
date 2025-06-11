@@ -46,18 +46,10 @@ function App() {
       {SelectedImage && (
       <>
         <MainCard 
-        imgurl={SelectedImage.imageurl}
-        location={SelectedImage.location}
-        date={SelectedImage.date}
-        time={SelectedImage.time}
-        name={SelectedImage.name}    className="dispimg" />
-
-       <Thumbnail
         images={images}
-        onSelect={(item) => {
-          setSelectedImage(item);}}
-      selectedImage ={SelectedImage }
-/>
+            className="dispimg" />
+
+       
         
       </>
       )

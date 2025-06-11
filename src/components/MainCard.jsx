@@ -10,11 +10,18 @@ import 'swiper/css/keyboard'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
 
+
+
 function MainCard(props){
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
+    const [fullview , setfullview] = useState(false);
 
     const currentImage = props.images[activeIndex];
+
+    
+    
+
     return (
         <>
         <main>
@@ -34,7 +41,10 @@ function MainCard(props){
               {props.images.map((item) => (
                 <SwiperSlide key={item.id}>
                     <div className="imageWrapper">
-                  <ImageCard imgurl={item.imageurl} className="main-image" />
+                  <ImageCard imgurl={item.imageurl} className="main-image" onClick={() => {
+    console.log("Image clicked!");
+    setfullview(true);
+  }}/>
                   </div>
                 </SwiperSlide>
                 
@@ -68,6 +78,15 @@ function MainCard(props){
              </div>
           
         </main>
+
+
+        {fullview && (
+    
+        <div onClick={() => setfullview(false)} className="fullscreencontainer">
+          <ImageCard imgurl={currentImage.imageurl} className="fullimage"/>  
+
+      </div>)}
+
       </>
         );
 }

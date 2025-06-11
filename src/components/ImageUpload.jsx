@@ -112,7 +112,7 @@ function ImageUpload({ onFileSelect }){
     <div>
       <h1 className="mainheading">🧭SnappyMap</h1> 
      { (uploaded == true) ? <div className = "uploadedimg"> <label>
-      <input type='file' onChange= {fileview} accept="video/*,image/*"
+      <input type='file' onChange= {fileview} 
         hidden/>
         <img src="/images/uploaderm.png"  className="imagelogo1"/>
         </label>
@@ -120,7 +120,7 @@ function ImageUpload({ onFileSelect }){
        :<div className = "uploadimg">
     <h1>upload Image </h1>
     <label className="impir">
-    <input type='file' onChange= {fileview} accept="video/*,image/*"
+    <input type='file' onChange= {fileview} 
         hidden/>
         <img src="/images/uploaderm.png"  className="imagelogo"/>
         </label>

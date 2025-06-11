@@ -93,6 +93,7 @@ function ImageUpload({ onFileSelect }){
                 Location :location,
                 date:formattedDate ,
                 time: time
+                
               });
               
     
@@ -120,7 +121,7 @@ function ImageUpload({ onFileSelect }){
        :<div className = "uploadimg">
     <h1>upload Image </h1>
     <label className="impir">
-    <input type='file' onChange= {fileview} 
+    <input type='file' onChange= {fileview}  
         hidden/>
         <img src="/images/uploaderm.png"  className="imagelogo"/>
         </label>

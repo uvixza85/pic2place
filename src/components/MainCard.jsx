@@ -42,7 +42,6 @@ function MainCard(props){
                 <SwiperSlide key={item.id}>
                     <div className="imageWrapper">
                   <ImageCard imgurl={item.imageurl} className="main-image" onClick={() => {
-    console.log("Image clicked!");
     setfullview(true);
   }}/>
                   </div>

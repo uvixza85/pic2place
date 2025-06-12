@@ -76,15 +76,21 @@ function ImageUpload({ onFileSelect }){
             const latitude = tags.gps.Latitude
             const longitude = tags.gps.Longitude
 
-            const [rawDate, time] = datetimeStr[0].split(" ");
+            const [rawDate, rawtime] = datetimeStr[0].split(" ");
+            
             const [year, month, day] = rawDate.split(":").map(Number);
             
             const dateObj = new Date(year, month - 1, day);
             const formattedDate = dateObj.toLocaleDateString("en-GB", {
+              weekday: 'long',
               day: "numeric",
               month: "long",
               year: "numeric",
             });
+            const [hours, minutes] = rawtime.split(":");
+            const formattedTime = `${hours}:${minutes}`;
+
+            
 
             const location = nearbySearch(latitude, longitude);
             onFileSelect({
@@ -92,7 +98,7 @@ function ImageUpload({ onFileSelect }){
                 url: newurl,
                 Location :location,
                 date:formattedDate ,
-                time: time
+                time: formattedTime 
                 
               });
               

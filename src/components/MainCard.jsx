@@ -81,7 +81,7 @@ function MainCard(props){
               onSwiper={setThumbsSwiper}
               watchSlidesProgress
               spaceBetween={0}
-              slidesPerView="auto"
+              slidesPerView={Math.min(props.images.length, 6)}
               className="thumbs-swiper"
             >
               {props.images.map((item) => (

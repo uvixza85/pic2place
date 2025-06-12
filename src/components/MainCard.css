@@ -26,24 +26,34 @@
 
 .swiper {
     max-width: 100%;
-    overflow: hidde }
+    overflow: hidden }
+
 
     .imageWrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100%; }
+            height: 450px;
+            width: 100%;
+            overflow: hidden;
+            background-color: #FFE3A9;
+                
+            }
+                        .swiper-slide {
+                            width: 100% ;             }
 
 .main-image {
-    height: 450px;
-    width: 650px;
+    width: 100%;
+        height: 100%;
+  object-fit: contain;
     border-radius: 12px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border: 2px solid #ddd;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease-in-out;
    
-    /* Add transition */
+   
+
 }
 
 

@@ -4,7 +4,6 @@ import './App.css'
 import ImageUpload from './components/ImageUpload';
 import MainCard from './components/MainCard';
 import  { useEffect } from 'react';
-import Thumbnail from './components/Thumbnail';
 
 function App() {
   

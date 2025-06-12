@@ -1,4 +1,4 @@
-import React  , {useState}from "react";
+import React  , { useRef, useState, useEffect }from "react";
 import ImageCard from "./ImageCard";
 import "./MainCard.css"
 
@@ -16,11 +16,28 @@ function MainCard(props){
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const [fullview , setfullview] = useState(false);
-
+    const swiperRef = useRef(null);
     const currentImage = props.images[activeIndex];
+    const prevLength = useRef(props.images.length);
 
     
-    
+    useEffect(() => {
+        if (
+          swiperRef.current &&
+          props.images.length > 0 &&
+          props.images.length !== prevLength.current
+        ) {
+          const lastIndex = props.images.length - 1;
+          swiperRef.current.update();
+      
+          // Slide after a slight delay to ensure DOM is updated
+          setTimeout(() => {
+            swiperRef.current?.slideTo(lastIndex);
+          }, 100);
+          // Update ref tracker
+          prevLength.current = props.images.length;
+        }
+      }, [props.images]);
 
     return (
         <>
@@ -30,6 +47,7 @@ function MainCard(props){
             <Swiper
               modules={[Navigation, Keyboard, Thumbs, EffectCreative]}
               thumbs={{ swiper: thumbsSwiper }}
+              onSwiper={(swiper) => (swiperRef.current = swiper)}
               spaceBetween={10}
               slidesPerView={1}
               navigation
@@ -63,7 +81,7 @@ function MainCard(props){
               onSwiper={setThumbsSwiper}
               watchSlidesProgress
               spaceBetween={0}
-              slidesPerView={Math.min(props.images.length, 5)}
+              slidesPerView="auto"
               className="thumbs-swiper"
             >
               {props.images.map((item) => (
@@ -77,6 +95,7 @@ function MainCard(props){
              </div>
           
         </main>
+
 
 
         {fullview && (

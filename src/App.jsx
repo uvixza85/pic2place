@@ -11,18 +11,18 @@ function App() {
   const [images, setImages] = useState([]);
 
       const handleFileChange = (fileObj) => {
-        const { name, url, Location ,date ,time} = fileObj
+        const { name, url,isVideo, Location ,date ,time} = fileObj
         
         const newImage = {
           id: Date.now(),
           name,
           imageurl: url,
           blob: url,
+          isVideo: isVideo,
           location: Location,
           date,
           time,
         };
-    
         setImages((prev) => [...prev, newImage]);
         setSelectedImage(newImage);
 

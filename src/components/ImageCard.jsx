@@ -1,10 +1,25 @@
 import React from "react";
 
 function ImageCard(props){
-    
     return(
         
-            <img src={props.imgurl }  className={props.className} onClick={props.onClick}  />
+        <>
+        {props.isVideo ? (
+          <video
+            src={props.imgurl}
+            className={props.className}
+            controls
+            onClick={props.onClick}
+          />
+        ) : (
+          <img
+            src={props.imgurl}
+            className={props.className}
+            onClick={props.onClick}
+            alt="media"
+          />
+        )}
+      </>
          
     );
 }

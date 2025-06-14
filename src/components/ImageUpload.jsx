@@ -56,6 +56,8 @@ function ImageUpload({ onFileSelect }){
 
     async function fileview(event){
         const selectedFile = event.target.files[0];
+        const isVideo = selectedFile.type.startsWith("video/");
+        console.log(isVideo)
         var newurl; 
 
         try {
@@ -70,6 +72,8 @@ function ImageUpload({ onFileSelect }){
               }
               setUploaded(true)
             const name = selectedFile.name;
+            console.log(name);
+            if(!isVideo){
             const arrayBuffer = await selectedFile.arrayBuffer();
             const tags =  ExifReader.load(arrayBuffer, { expanded: true });
             const datetimeStr = tags.exif.DateTime.value;
@@ -90,17 +94,40 @@ function ImageUpload({ onFileSelect }){
             const [hours, minutes] = rawtime.split(":");
             const formattedTime = `${hours}:${minutes}`;
 
-            
 
             const location = nearbySearch(latitude, longitude);
             onFileSelect({
               name : name,
                 url: newurl,
+                isVideo: isVideo,
                 Location :location,
                 date:formattedDate ,
                 time: formattedTime 
                 
-              });
+              });}
+              else{
+
+                const lastModified = new Date(selectedFile.lastModified);
+    const date = lastModified.toLocaleDateString("en-GB", {
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+const time = lastModified.toLocaleTimeString("en-GB", {
+  hour: "2-digit",
+  minute: "2-digit"
+});
+                onFileSelect({
+                  name : name,
+                    url: newurl,
+                    isVideo: isVideo,
+                    Location :null,
+                    date:date ,
+                    time: time
+                    
+                  });
+              }
               
     
         } 
@@ -109,7 +136,9 @@ function ImageUpload({ onFileSelect }){
             console.error("Error reading EXIF:", err);
             onFileSelect({
                 url: newurl,
-                Location:null,
+                Location:"no data",
+                date:"no data" ,
+                time: "no data"
             });
         
         } 
@@ -127,7 +156,7 @@ function ImageUpload({ onFileSelect }){
        :<div className = "uploadimg">
     <h1>upload Image </h1>
     <label className="impir">
-    <input type='file' onChange= {fileview}  
+    <input type='file'  onChange= {fileview}  
         hidden/>
         <img src="/images/uploaderm.png"  className="imagelogo"/>
         </label>

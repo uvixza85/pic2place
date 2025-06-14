@@ -59,7 +59,7 @@ function MainCard(props){
               {props.images.map((item) => (
                 <SwiperSlide key={item.id}>
                     <div className="imageWrapper">
-                  <ImageCard imgurl={item.imageurl} className="main-image" onClick={() => {
+                  <ImageCard imgurl={item.imageurl} isVideo={item.isVideo}  className="main-image" onClick={() => {
     setfullview(true);
   }}/>
                   </div>
@@ -87,7 +87,7 @@ function MainCard(props){
               {props.images.map((item) => (
                 <SwiperSlide key={`thumb-${item.id}`}>
                     
-                  <ImageCard imgurl={item.imageurl} className="thumbnail-image" />
+                  <ImageCard imgurl={item.imageurl} isVideo={item.isVideo}  className="thumbnail-image" />
                  
                 </SwiperSlide>
               ))}
@@ -101,7 +101,7 @@ function MainCard(props){
         {fullview && (
     
         <div onClick={() => setfullview(false)} className="fullscreencontainer">
-          <ImageCard imgurl={currentImage.imageurl} className="fullimage"/>  
+          <ImageCard imgurl={currentImage.imageurl} isVideo={currentImage.isVideo}    className="fullimage"/>  
 
       </div>)}
 
